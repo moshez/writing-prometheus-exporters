@@ -30,29 +30,62 @@ Ancestral home of the Ramaytush Ohlone
 
 \begin{frame}
 \frametitle{Prometheus}
+
+\begin{itemize}
+\item Metrics collection and aggregation
+\item Pull-based
+\item Time-series-based
+\end{itemize}
+
 \end{frame}
 
 \begin{frame}
 \frametitle{Exporter}
+
+\begin{itemize}
+\item Facade
+\item Not magic
+\end{itemize}
+
 \end{frame}
 
 \begin{frame}
 \frametitle{Configuration}
+
+\begin{lstlisting}
+scrape_configs:
+  - job_name: 'my-thing'
+    static_configs:
+      - targets: ['hostname.internal.example.com:9090']
+\end{lstlisting}
+
 \end{frame}
 
 \begin{frame}
 \frametitle{Gauge}
-histogram, counter, etc.
+
+Measured instanenous value\pause
+
+memory usage
+
 \end{frame}
 
 \begin{frame}
 \frametitle{Historgram}
-histogram, counter, etc.
+
+Samples\pause
+
+request latency
+
 \end{frame}
 
 \begin{frame}
 \frametitle{Counter}
-histogram, counter, etc.
+
+Ticks up until reset\pause
+
+total requests
+
 \end{frame}
 
 \section{Basic Example}
