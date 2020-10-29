@@ -91,7 +91,27 @@ total requests
 \section{Basic Example}
 
 \begin{frame}
-\frametitle{Pyramid Service}
+\frametitle{Pyramid Service: Prometheus}
+\lstinputlisting[language=Python, firstline=7, lastline=11]{minimal.py}
+\end{frame}
+
+\begin{frame}
+\frametitle{Pyramid Service: View}
+\lstinputlisting[language=Python, firstline=13, lastline=17]{minimal.py}
+\end{frame}
+
+\begin{frame}
+\frametitle{Pyramid Service: Configuration}
+\lstinputlisting[language=Python, firstline=19, lastline=22]{minimal.py}
+\end{frame}
+
+\begin{frame}
+\frametitle{Output}
+\begin{lstlisting}
+# HELP level The level
+# TYPE level gauge
+level 0.6879434220238727
+\end{lstlisting}
 \end{frame}
 
 \begin{frame}
