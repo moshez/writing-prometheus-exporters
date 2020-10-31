@@ -49,7 +49,7 @@ Ancestral home of the Ramaytush Ohlone
 
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{Configuration}
 
 \begin{lstlisting}
@@ -90,32 +90,39 @@ total requests
 
 \section{Basic Example}
 
-\begin{frame}
-\frametitle{Pyramid Service: Prometheus}
-\lstinputlisting[language=Python, firstline=7, lastline=11]{minimal.py}
-\end{frame}
-
-\begin{frame}
-\frametitle{Pyramid Service: View}
-\lstinputlisting[language=Python, firstline=13, lastline=17]{minimal.py}
-\end{frame}
-
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{Pyramid Service: Configuration}
-\lstinputlisting[language=Python, firstline=19, lastline=22]{minimal.py}
+\lstinputlisting[language=Python, firstline=46]{minimal.py}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
+\frametitle{Pyramid Service: Metrics Configuration}
+\lstinputlisting[language=Python, firstline=31, lastline=43]{minimal.py}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Pyramid Service: View}
+\lstinputlisting[language=Python, firstline=20, lastline=28]{minimal.py}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Pyramid Service: Metrics Update}
+\lstinputlisting[language=Python, firstline=14, lastline=17]{minimal.py}
+\end{frame}
+
+\begin{frame}[fragile]
 \frametitle{Output}
 \begin{lstlisting}
 # HELP level The level
 # TYPE level gauge
-level 0.6879434220238727
+level 0.06199425960241822
+# HELP hits_total Hits to endpoint
+# TYPE hits_total counter
+hits_total 1.0
+# HELP hits_created Hits to endpoint
+# TYPE hits_created gauge
+hits_created 1.6041066280902677e+09
 \end{lstlisting}
-\end{frame}
-
-\begin{frame}
-\frametitle{Setting a Good Example}
 \end{frame}
 
 \begin{frame}
@@ -134,15 +141,15 @@ level 0.6879434220238727
 
 \begin{frame}
 \frametitle{What is a Counter}
-\\end{frame}
+\end{frame}
 
 \begin{frame}
 \frametitle{Counters in Response}
-\\end{frame}
+\end{frame}
 
 \begin{frame}
 \frametitle{Creation Time}
-\\end{frame}
+\end{frame}
 
 \section{Complete Example}
 
