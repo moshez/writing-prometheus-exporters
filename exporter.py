@@ -1,6 +1,7 @@
 from prometheus_client import (
     CollectorRegistry,
-    Gauge, Counter,
+    Gauge,
+    Counter,
 )
 from pyramid.config import Configurator
 from pyramid.response import Response
@@ -8,17 +9,25 @@ from prometheus_client import (
     generate_latest,
     CONTENT_TYPE_LATEST,
 )
+import time
+import socket
 
 
-def update(request):
+def synthetic(service):
     before = time.perf_counter()
     sock = socket.socket()
     sock.settimeout(1)
-    sock.connect(request.registry["service"])
+    sock.connect(service)
     sock.recv(4096)
     sock.close()
-    spent = time.perf_counter() - before()
-    request.registry["synthetic"].set(spent)
+    return time.perf_counter() - before
+
+
+def update(request):
+    latency = synthetic(
+        request.registry["service"]
+    )
+    request.registry["synthetic"].set(latency)
     request.registry["hits"].inc()
 
 
@@ -49,7 +58,10 @@ def configure_metrics(mapping):
 
 
 with Configurator() as config:
-    config.registry["service"] = ('localhost', 1113)
+    config.registry["service"] = (
+        "localhost",
+        1113,
+    )
     configure_metrics(config.registry)
     config.add_route("metrics", "/metrics")
     config.add_view(

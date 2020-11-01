@@ -130,7 +130,7 @@ hits_created 1.6041066280902677e+09
 RFC 867
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{Daytime Service}
 RFC 867\pause
 
@@ -141,15 +141,29 @@ Sat Oct 31 18:15:12 2020
 
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{Synthetic Query}
 Exporter Judo\pause
 
+\lstinputlisting[language=Python, firstline=16, lastline=23]{exporter.py}
 
 \end{frame}
 
-\begin{frame}
-\frametitle{Putting it All Together}
+\begin{frame}[fragile]
+\frametitle{Output}
+
+\begin{lstlisting}
+# HELP synthetic Synthetic query latency
+# TYPE synthetic gauge
+synthetic 0.0003916006535291672
+# HELP hits_total Hits to endpoint
+# TYPE hits_total counter
+hits_total 2.0
+# HELP hits_created Hits to endpoint
+# TYPE hits_created gauge
+hits_created 1.6042536905489218e+09
+\end{lstlisting}
+
 \end{frame}
 
 \section{Side-car Counters}
