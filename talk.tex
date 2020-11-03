@@ -165,14 +165,65 @@ hits_created 1.6042536905489218e+09
 
 \begin{frame}
 \frametitle{What is a Counter}
+
+\begin{itemize}
+\item Increase-only
+\item Creation time
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Side-car Counter}
+
+\begin{lstlisting}
+class SidecarCounter(metrics.MetricWrapperBase):
+    _type = "counter"
+    def _metric_init(self):
+        self._value = values.ValueClass(
+            self._type,
+            self._name,
+            self._name + "_total",
+            self._labelnames,
+            self._labelvalues,
+        )
+        self._created = values.ValueClass(
+            self._type,
+            self._name,
+            self._name + "_created",
+            self._labelnames,
+            self._labelvalues,
+        )
+ \end{lstlisting}
+ \end{frame}
+ 
+
+\begin{frame}[fragile]
+\frametitle{Set/Get Counter}
+\begin{lstlisting}
+    def set(self, what, *, when):
+        self._value.set(what)
+        self._created.set(when)
+    def _child_samples(self):
+        return (
+            ("_total", {}, self._value.get()),
+            ("_created", {}, self._created.get()),
+        )
+\end{lstlisting}
 \end{frame}
 
 \begin{frame}
 \frametitle{Counters in Response}
+
+\begin{lstlisting}
+$ nc localhost 1111
+TBD
+\end{lstlisting}
 \end{frame}
 
 \begin{frame}
-\frametitle{Creation Time}
+\frametitle{Exporting Counters}
+TBD
 \end{frame}
 
 \section{Results}
