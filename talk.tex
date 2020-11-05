@@ -212,18 +212,32 @@ class SidecarCounter(metrics.MetricWrapperBase):
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{Counters in Response}
 
 \begin{lstlisting}
-$ nc localhost 1111
-TBD
+$ nc localhost 1111 | \
+> python -m json.tool
+{
+    "launched": "2020-11-04T17:57:42.448578",
+    "requests": 2
+}
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{Exporting Counters}
-TBD
+
+\begin{lstlisting}
+def hits(service):
+    with socket.create_connection(service) as sock:
+        sock.settimeout(1)
+        data = sock.recv(4096)
+    result = json.loads(data)
+    result["launched"] = isoparse(result["launched"])
+    return result
+\end{lstlisting}
+
 \end{frame}
 
 \section{Results}
@@ -235,6 +249,16 @@ TBD
 \includegraphics[scale=0.25]{prometheus}
 \end{figure}
 
+\end{frame}
+
+\begin{frame}
+\frametitle{Metrics Design}
+
+\begin{itemize}
+\item Histogram vs. Gauge\pause
+\item Exporter latency\pause
+\item Enum
+\end{itemize}
 \end{frame}
 
 \begin{frame}
